@@ -1,0 +1,8 @@
+FormationEntityFramework.sdf
+FormationEntityFramework.suo
+FormationEntityFramework.v11.suo
+bin/
+obj/
+*.opensdf
+packages/
+SQLite.Interop.dll
