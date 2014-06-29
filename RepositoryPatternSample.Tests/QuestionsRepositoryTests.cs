@@ -6,14 +6,17 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace RepositoryPatternSample.Tests
 {
-    [TestClass]
-    public class QuestionsRepositoryTests
+    public abstract class QuestionsRepositoryTests
     {
-        [TestMethod]
-        public void CanAddAndGetQuestionsBack()
-        {
-            QuestionsRepository repo = new QuestionsRepository();
+        protected IQuestionsRepository repository = null;
 
+        protected QuestionsRepositoryTests(IQuestionsRepository repository)
+        {
+            this.repository = repository;
+        }
+
+        public virtual void CanAddAndGetQuestionsBack()
+        {
             Question inputQuestion = new Question
             {
                 CreationDate = DateTime.Now,
@@ -22,11 +25,18 @@ namespace RepositoryPatternSample.Tests
                 IsOptional = true
             };
 
-            repo.Add(inputQuestion);
+            Question question = new Question
+            {
+                CreationDate = DateTime.UtcNow,
+                Text = "Why is the sky blue?",
+                Answer = "Because."
+            };
+
+            repository.Add(inputQuestion);
 
             Assert.IsTrue(inputQuestion.ID > 0);
 
-            Question outputQuestion = repo.GetQuestionById(inputQuestion.ID);
+            Question outputQuestion = repository.GetQuestionById(inputQuestion.ID);
 
             Assert.AreEqual(inputQuestion.ID, outputQuestion.ID);
             Assert.IsTrue((inputQuestion.CreationDate - outputQuestion.CreationDate).TotalSeconds < 1);
@@ -35,35 +45,29 @@ namespace RepositoryPatternSample.Tests
             Assert.AreEqual(inputQuestion.IsOptional, outputQuestion.IsOptional);
         }
 
-        [TestMethod]
-        public void CantGetAnUnexistingQuestion()
+        public virtual void CantGetAnUnexistingQuestion()
         {
-            QuestionsRepository repo = new QuestionsRepository();
-
-            Question question = repo.GetQuestionById(-1);
+            Question question = repository.GetQuestionById(-1);
 
             Assert.IsNull(question);
         }
 
-        [TestMethod]
-        public void CanClearQuestionsRepository()
+        public virtual void CanClearQuestionsRepository()
         {
-            QuestionsRepository repo = new QuestionsRepository();
-
-            repo.Add(new Question
+            repository.Add(new Question
                 {
                     CreationDate = DateTime.UtcNow,
                     Text = "Knock knock!",
                     Answer = "Who's there?"
                 });
 
-            IEnumerable<Question> all = repo.GetAllQuestions();
+            IEnumerable<Question> all = repository.GetAllQuestions();
 
             Assert.IsTrue(all.Count() >= 1);
 
-            repo.Clear();
+            repository.Clear();
 
-            all = repo.GetAllQuestions();
+            all = repository.GetAllQuestions();
 
             Assert.AreEqual(0, all.Count());
         }

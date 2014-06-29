@@ -77,10 +77,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IQuestionsRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs" />
-    <Compile Include="QuestionsRepository.cs" />
+    <Compile Include="EFQuestionsRepository.cs" />
+    <Compile Include="SQLiteQuestionsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

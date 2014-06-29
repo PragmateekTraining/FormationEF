@@ -10,6 +10,7 @@ namespace RepositoryPatternSample
     {
         static void Main(string[] args)
         {
+            new EFQuestionsRepository().Add(new Question { CreationDate = DateTime.UtcNow });
         }
     }
 }

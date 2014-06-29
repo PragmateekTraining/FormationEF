@@ -6,11 +6,11 @@ using System.Data.SQLite;
 
 namespace RepositoryPatternSample
 {
-    public class QuestionsRepository
+    public class SQLiteQuestionsRepository : IQuestionsRepository
     {
         const string connectionString = "Data Source=questions.db3";
 
-        public QuestionsRepository()
+        public SQLiteQuestionsRepository()
         {
             using (IDbConnection connection = OpenConnection())
             {
