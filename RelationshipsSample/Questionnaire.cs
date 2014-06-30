@@ -11,6 +11,6 @@ namespace Model
         public long ID { get; set; }
         public string Title { get; set; }
 
-        public IList<QuestionWithMetadata> Questions { get; set; }
+        public IList<QuestionBase> Questions { get; set; }
     }
 }

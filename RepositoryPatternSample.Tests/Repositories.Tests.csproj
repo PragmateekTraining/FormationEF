@@ -76,6 +76,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="QuestionnairesRepositoryTests.cs" />
     <Compile Include="QuestionWithAuthorRepositoryTests.cs" />
     <Compile Include="QuestionWithMetadataRepositoryTests.cs" />
     <Compile Include="EFQuestionBasesRepositoryTests.cs" />
