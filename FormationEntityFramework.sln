@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories.Tests", "Repos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "RelationshipsSample\Model.csproj", "{E3428A17-5A65-4CCE-B7F2-E60C5E320721}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelFirst", "ModelFirst\ModelFirst.csproj", "{5619E272-E78B-463F-AA32-1D852385669E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,12 @@ Global
 		{E3428A17-5A65-4CCE-B7F2-E60C5E320721}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3428A17-5A65-4CCE-B7F2-E60C5E320721}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E3428A17-5A65-4CCE-B7F2-E60C5E320721}.Release|x86.ActiveCfg = Release|Any CPU
+		{5619E272-E78B-463F-AA32-1D852385669E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5619E272-E78B-463F-AA32-1D852385669E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5619E272-E78B-463F-AA32-1D852385669E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5619E272-E78B-463F-AA32-1D852385669E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5619E272-E78B-463F-AA32-1D852385669E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5619E272-E78B-463F-AA32-1D852385669E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
