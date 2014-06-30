@@ -7,8 +7,8 @@
     <ProjectGuid>{E3428A17-5A65-4CCE-B7F2-E60C5E320721}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RelationshipsSample</RootNamespace>
-    <AssemblyName>RelationshipsSample</AssemblyName>
+    <RootNamespace>Model</RootNamespace>
+    <AssemblyName>Model</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="QuestionWithAuthor.cs" />
+    <Compile Include="Questionnaire.cs" />
     <Compile Include="QuestionWithMetadata.cs" />
     <Compile Include="QuestionBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

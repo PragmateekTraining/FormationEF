@@ -25,6 +25,10 @@ namespace Repositories.Tests
                     Author = "Chuck Norris",
                     Comment = "If you don't answer I'll kick your ass!"
                 },
+                Nomination = new Nomination
+                {
+                    Title = "Question of the year 2014"
+                },
                 Text = "0 / 0?",
                 Answer = "NaN"
             };
@@ -44,6 +48,10 @@ namespace Repositories.Tests
             Assert.IsTrue((inputQuestion.Metadata.CreationDate - outputQuestion.Metadata.CreationDate).TotalSeconds < 1);
             Assert.AreEqual(inputQuestion.Metadata.Author, outputQuestion.Metadata.Author);
             Assert.AreEqual(inputQuestion.Metadata.Comment, outputQuestion.Metadata.Comment);
+
+            Assert.IsNotNull(outputQuestion.Nomination);
+
+            Assert.AreEqual(inputQuestion.Nomination.Title, outputQuestion.Nomination.Title);
         }
 
         [TestMethod]
