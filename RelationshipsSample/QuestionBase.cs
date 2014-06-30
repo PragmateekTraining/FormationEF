@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepositoryPatternSample
+namespace Model
 {
-    public class Question
+    public class QuestionBase
     {
         public long ID { get; set; }
         public DateTime CreationDate { get; set; }

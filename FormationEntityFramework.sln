@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryPatternSample", "RepositoryPatternSample\RepositoryPatternSample.csproj", "{1F263C13-6D52-4F2C-AFCD-A3ADDF537B15}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "RepositoryPatternSample\Repositories.csproj", "{1F263C13-6D52-4F2C-AFCD-A3ADDF537B15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryPatternSample.Tests", "RepositoryPatternSample.Tests\RepositoryPatternSample.Tests.csproj", "{A839EC81-F58C-4879-9DA1-B4D22267235F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories.Tests", "RepositoryPatternSample.Tests\Repositories.Tests.csproj", "{A839EC81-F58C-4879-9DA1-B4D22267235F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "RelationshipsSample\Model.csproj", "{E3428A17-5A65-4CCE-B7F2-E60C5E320721}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,12 @@ Global
 		{A839EC81-F58C-4879-9DA1-B4D22267235F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A839EC81-F58C-4879-9DA1-B4D22267235F}.Release|x86.ActiveCfg = Release|x86
 		{A839EC81-F58C-4879-9DA1-B4D22267235F}.Release|x86.Build.0 = Release|x86
+		{E3428A17-5A65-4CCE-B7F2-E60C5E320721}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3428A17-5A65-4CCE-B7F2-E60C5E320721}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3428A17-5A65-4CCE-B7F2-E60C5E320721}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E3428A17-5A65-4CCE-B7F2-E60C5E320721}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3428A17-5A65-4CCE-B7F2-E60C5E320721}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3428A17-5A65-4CCE-B7F2-E60C5E320721}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

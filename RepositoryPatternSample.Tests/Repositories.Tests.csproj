@@ -76,15 +76,20 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="EFQuestionsRepositoryTests.cs" />
+    <Compile Include="QuestionWithMetadataRepositoryTests.cs" />
+    <Compile Include="EFQuestionBasesRepositoryTests.cs" />
     <Compile Include="QuestionsRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLiteQuestionsRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RepositoryPatternSample\RepositoryPatternSample.csproj">
+    <ProjectReference Include="..\RelationshipsSample\Model.csproj">
+      <Project>{e3428a17-5a65-4cce-b7f2-e60c5e320721}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryPatternSample\Repositories.csproj">
       <Project>{1f263c13-6d52-4f2c-afcd-a3addf537b15}</Project>
-      <Name>RepositoryPatternSample</Name>
+      <Name>Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

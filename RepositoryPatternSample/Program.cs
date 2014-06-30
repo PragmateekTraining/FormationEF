@@ -4,13 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Model;
+using Repositories;
+
 namespace RepositoryPatternSample
 {
     class Program
     {
         static void Main(string[] args)
         {
-            new EFQuestionsRepository().Add(new Question { CreationDate = DateTime.UtcNow });
+            new EFQuestionBasesRepository().Add(new QuestionBase { CreationDate = DateTime.UtcNow });
         }
     }
 }

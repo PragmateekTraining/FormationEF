@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data;
 using System.Data.SQLite;
+using Model;
 
-namespace RepositoryPatternSample
+namespace Repositories
 {
-    public class SQLiteQuestionsRepository : IQuestionsRepository
+    public class SQLiteQuestionBasesRepository : IQuestionBasesRepository
     {
         const string connectionString = "Data Source=questions.db3";
 
-        public SQLiteQuestionsRepository()
+        public SQLiteQuestionBasesRepository()
         {
             using (IDbConnection connection = OpenConnection())
             {
@@ -31,7 +32,7 @@ namespace RepositoryPatternSample
             return connection;
         }
 
-        public void Add(Question question)
+        public void Add(QuestionBase question)
         {
             using (IDbConnection connection = OpenConnection())
             {
@@ -48,15 +49,15 @@ namespace RepositoryPatternSample
             }
         }
 
-        private IList<Question> ExecuteAndRead(IDbCommand command)
+        private IList<QuestionBase> ExecuteAndRead(IDbCommand command)
         {
-            IList<Question> questions = new List<Question>();
+            IList<QuestionBase> questions = new List<QuestionBase>();
 
             IDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
             {
-                Question question = new Question
+                QuestionBase question = new QuestionBase
                 {
                     ID = (long)reader["id"],
                     CreationDate = DateTime.ParseExact((string)reader["creation_date"], "s", null),
@@ -71,9 +72,9 @@ namespace RepositoryPatternSample
             return questions;
         }
 
-        public Question GetQuestionById(long id)
+        public QuestionBase GetQuestionById(long id)
         {
-            Question question = null;
+            QuestionBase question = null;
 
             using (IDbConnection connection = OpenConnection())
             {
@@ -89,7 +90,7 @@ namespace RepositoryPatternSample
             return question;
         }
 
-        public IEnumerable<Question> GetAllQuestions()
+        public IEnumerable<QuestionBase> GetAllQuestions()
         {
             using (IDbConnection connection = OpenConnection())
             {

@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepositoryPatternSample.Tests
+namespace Repositories.Tests
 {
     [TestClass]
     public class SQLiteQuestionsRepositoryTests : QuestionsRepositoryTests
     {
         public SQLiteQuestionsRepositoryTests()
-            : base(new SQLiteQuestionsRepository())
+            : base(new SQLiteQuestionBasesRepository())
         {
         }
 

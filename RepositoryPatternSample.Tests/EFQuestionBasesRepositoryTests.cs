@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepositoryPatternSample.Tests
+namespace Repositories.Tests
 {
     [TestClass]
-    public class EFQuestionsRepositoryTests : QuestionsRepositoryTests
+    public class EFQuestionBasesRepositoryTests : QuestionsRepositoryTests
     {
-        public EFQuestionsRepositoryTests()
-            : base(new EFQuestionsRepository())
+        public EFQuestionBasesRepositoryTests()
+            : base(new EFQuestionBasesRepository())
         {
         }
 

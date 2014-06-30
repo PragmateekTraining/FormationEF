@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Model;
 
-namespace RepositoryPatternSample
+namespace Repositories
 {
-    public class EFQuestionsRepository : IQuestionsRepository
+    public class EFQuestionBasesRepository : IQuestionBasesRepository
     {
         class QuestionsContext : DbContext
         {
@@ -13,35 +14,35 @@ namespace RepositoryPatternSample
             {
             }
 
-            protected override void OnModelCreating(DbModelBuilder modelBuilder)
+            /*protected override void OnModelCreating(DbModelBuilder modelBuilder)
             {
                 modelBuilder.Entity<Question>().ToTable("questions");
-            }
+            }*/
 
-            public DbSet<Question> Questions { get; set; }
+            public DbSet<QuestionBase> Questions { get; set; }
         }
 
         private QuestionsContext context = new QuestionsContext();
 
-        public void Add(Question question)
+        public void Add(QuestionBase question)
         {
             context.Questions.Add(question);
             context.SaveChanges();
         }
 
-        public Question GetQuestionById(long id)
+        public QuestionBase GetQuestionById(long id)
         {
             return context.Questions.SingleOrDefault(q => q.ID == id);
         }
 
-        public IEnumerable<Question> GetAllQuestions()
+        public IEnumerable<QuestionBase> GetAllQuestions()
         {
             return context.Questions.ToList();
         }
 
         public void Clear()
         {
-            context.Database.ExecuteSqlCommand("DELETE FROM questions");
+            context.Database.ExecuteSqlCommand("DELETE FROM QuestionBases");
         }
     }
 }

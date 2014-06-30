@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Model;
+using Repositories;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace RepositoryPatternSample.Tests
+namespace Repositories.Tests
 {
     public abstract class QuestionsRepositoryTests
     {
-        protected IQuestionsRepository repository = null;
+        protected IQuestionBasesRepository repository = null;
 
-        protected QuestionsRepositoryTests(IQuestionsRepository repository)
+        protected QuestionsRepositoryTests(IQuestionBasesRepository repository)
         {
             this.repository = repository;
         }
 
         public virtual void CanAddAndGetQuestionsBack()
         {
-            Question inputQuestion = new Question
+            QuestionBase inputQuestion = new QuestionBase
             {
                 CreationDate = DateTime.Now,
                 Text = "1 + 1?",
@@ -25,7 +28,7 @@ namespace RepositoryPatternSample.Tests
                 IsOptional = true
             };
 
-            Question question = new Question
+            QuestionBase question = new QuestionBase
             {
                 CreationDate = DateTime.UtcNow,
                 Text = "Why is the sky blue?",
@@ -36,7 +39,7 @@ namespace RepositoryPatternSample.Tests
 
             Assert.IsTrue(inputQuestion.ID > 0);
 
-            Question outputQuestion = repository.GetQuestionById(inputQuestion.ID);
+            QuestionBase outputQuestion = repository.GetQuestionById(inputQuestion.ID);
 
             Assert.AreEqual(inputQuestion.ID, outputQuestion.ID);
             Assert.IsTrue((inputQuestion.CreationDate - outputQuestion.CreationDate).TotalSeconds < 1);
@@ -47,21 +50,21 @@ namespace RepositoryPatternSample.Tests
 
         public virtual void CantGetAnUnexistingQuestion()
         {
-            Question question = repository.GetQuestionById(-1);
+            QuestionBase question = repository.GetQuestionById(-1);
 
             Assert.IsNull(question);
         }
 
         public virtual void CanClearQuestionsRepository()
         {
-            repository.Add(new Question
+            repository.Add(new QuestionBase
                 {
                     CreationDate = DateTime.UtcNow,
                     Text = "Knock knock!",
                     Answer = "Who's there?"
                 });
 
-            IEnumerable<Question> all = repository.GetAllQuestions();
+            IEnumerable<QuestionBase> all = repository.GetAllQuestions();
 
             Assert.IsTrue(all.Count() >= 1);
 
