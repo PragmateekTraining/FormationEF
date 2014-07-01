@@ -77,6 +77,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EFTaggedQuestionsTPCRepository.cs" />
+    <Compile Include="EFTaggedQuestionsRepository.cs" />
     <Compile Include="EFQuestionnaireRepository.cs" />
     <Compile Include="EFQuestionWithAuthorRepository.cs" />
     <Compile Include="IQuestionWithMetadataRepository.cs" />
