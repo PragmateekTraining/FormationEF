@@ -20,7 +20,7 @@ namespace Repositories.Tests
 
         public virtual void CanAddAndGetQuestionsBack()
         {
-            QuestionBase inputQuestion = new QuestionBase
+            BasicQuestion inputQuestion = new BasicQuestion
             {
                 CreationDate = DateTime.Now,
                 Text = "1 + 1?",
@@ -28,18 +28,18 @@ namespace Repositories.Tests
                 IsOptional = true
             };
 
-            QuestionBase question = new QuestionBase
+            /*BasicQuestion question = new BasicQuestion
             {
                 CreationDate = DateTime.UtcNow,
                 Text = "Why is the sky blue?",
                 Answer = "Because."
-            };
+            };*/
 
             repository.Add(inputQuestion);
 
             Assert.IsTrue(inputQuestion.ID > 0);
 
-            QuestionBase outputQuestion = repository.GetQuestionById(inputQuestion.ID);
+            BasicQuestion outputQuestion = repository.GetQuestionById(inputQuestion.ID);
 
             Assert.AreEqual(inputQuestion.ID, outputQuestion.ID);
             Assert.IsTrue((inputQuestion.CreationDate - outputQuestion.CreationDate).TotalSeconds < 1);
@@ -50,21 +50,21 @@ namespace Repositories.Tests
 
         public virtual void CantGetAnUnexistingQuestion()
         {
-            QuestionBase question = repository.GetQuestionById(-1);
+            BasicQuestion question = repository.GetQuestionById(-1);
 
             Assert.IsNull(question);
         }
 
         public virtual void CanClearQuestionsRepository()
         {
-            repository.Add(new QuestionBase
+            repository.Add(new BasicQuestion
                 {
                     CreationDate = DateTime.UtcNow,
                     Text = "Knock knock!",
                     Answer = "Who's there?"
                 });
 
-            IEnumerable<QuestionBase> all = repository.GetAllQuestions();
+            IEnumerable<BasicQuestion> all = repository.GetAllQuestions();
 
             Assert.IsTrue(all.Count() >= 1);
 

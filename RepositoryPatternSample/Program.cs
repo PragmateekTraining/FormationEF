@@ -13,7 +13,7 @@ namespace RepositoryPatternSample
     {
         static void Main(string[] args)
         {
-            new EFQuestionBasesRepository().Add(new QuestionBase { CreationDate = DateTime.UtcNow });
+            new EFQuestionBasesRepository().Add(new BasicQuestion { CreationDate = DateTime.UtcNow });
         }
     }
 }

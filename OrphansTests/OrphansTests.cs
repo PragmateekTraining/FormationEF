@@ -3,7 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Collections.Generic;
+using System.Linq;
 using System.Data;
+using System.Data.SqlClient;
+using System.Data.Entity.Infrastructure;
 
 namespace OrphansTests
 {
@@ -13,7 +16,7 @@ namespace OrphansTests
 
         public string Name { get; set; }
 
-        public IList<Child> Children{get;set;}
+        public IList<Child> Children { get; set; }
 
         public Parent()
         {
@@ -27,7 +30,6 @@ namespace OrphansTests
 
         public string Name { get; set; }
 
-        // [Required]
         public Parent Parent { get; set; }
     }
 
@@ -45,12 +47,15 @@ namespace OrphansTests
         {
             Parent parent = new Parent { Name = "P1" };
 
-            parent.Children.Add(new Child { Name = "C1", /*Parent = parent*/ });
-            parent.Children.Add(new Child { Name = "C2", Parent = parent });
-            parent.Children.Add(new Child { Name = "C3", Parent = parent });
+            parent.Children.Add(new Child { Name = "C1" });
+            parent.Children.Add(new Child { Name = "C2" });
+            parent.Children.Add(new Child { Name = "C3"/*, Parent = parent*/ });
 
             using (Context context = new Context())
             {
+                context.Database.ExecuteSqlCommand("DELETE FROM Children");
+                context.Database.ExecuteSqlCommand("DELETE FROM Parents");
+
                 context.Parents.Add(parent);
 
                 context.SaveChanges();
@@ -62,16 +67,39 @@ namespace OrphansTests
                 Child children = parent.Children[1];
                 parent.Children.RemoveAt(1);
 
+                children.Parent = null;
+
                 context.Children.Remove(children);
 
                 context.SaveChanges();
 
-                using (IDbCommand command = context.Database.Connection.CreateCommand())
+                using (IDbConnection connection = new SqlConnection(context.Database.Connection.ConnectionString))
                 {
-                    command.CommandText = "SELECT * FROM Children";
-
-                    using (IDataReader reader = command.ExecuteReader())
+                    connection.Open();
+                    using (IDbCommand command = connection.CreateCommand())
                     {
+                        command.CommandText = "SELECT * FROM Children";
+
+                        var all = new[] { new { Name = "", Parent_ID = (long?)null } }.ToList();
+                        all.Clear();
+
+                        using (IDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var o = new
+                                {
+                                    Name = reader["Name"] as string,
+                                    Parent_ID = reader["Parent_ID"] != DBNull.Value ? (long)reader["Parent_ID"] : (long?)null
+                                };
+
+                                all.Add(o);
+                            }
+                        }
+
+                        Assert.AreEqual(2, all.Count);
+                        Assert.AreEqual("C2", all[1].Name);
+                        Assert.IsNull(all[1].Parent_ID);
                     }
                 }
             }

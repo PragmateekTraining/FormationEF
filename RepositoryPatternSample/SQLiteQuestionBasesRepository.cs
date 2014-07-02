@@ -32,7 +32,7 @@ namespace Repositories
             return connection;
         }
 
-        public void Add(QuestionBase question)
+        public void Add(BasicQuestion question)
         {
             using (IDbConnection connection = OpenConnection())
             {
@@ -49,15 +49,15 @@ namespace Repositories
             }
         }
 
-        private IList<QuestionBase> ExecuteAndRead(IDbCommand command)
+        private IList<BasicQuestion> ExecuteAndRead(IDbCommand command)
         {
-            IList<QuestionBase> questions = new List<QuestionBase>();
+            IList<BasicQuestion> questions = new List<BasicQuestion>();
 
             IDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
             {
-                QuestionBase question = new QuestionBase
+                BasicQuestion question = new BasicQuestion
                 {
                     ID = (long)reader["id"],
                     CreationDate = DateTime.ParseExact((string)reader["creation_date"], "s", null),
@@ -72,9 +72,9 @@ namespace Repositories
             return questions;
         }
 
-        public QuestionBase GetQuestionById(long id)
+        public BasicQuestion GetQuestionById(long id)
         {
-            QuestionBase question = null;
+            BasicQuestion question = null;
 
             using (IDbConnection connection = OpenConnection())
             {
@@ -90,7 +90,7 @@ namespace Repositories
             return question;
         }
 
-        public IEnumerable<QuestionBase> GetAllQuestions()
+        public IEnumerable<BasicQuestion> GetAllQuestions()
         {
             using (IDbConnection connection = OpenConnection())
             {

@@ -2,24 +2,27 @@
 using System.Data.Entity;
 using System.Linq;
 using Model;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Repositories
 {
-    public class EFQuestionBasesRepository : IQuestionBasesRepository
+    public class EFSQLiteQuestionBasesRepository : IQuestionBasesRepository
     {
         class QuestionsContext : DbContext
         {
             public QuestionsContext()
-                //: base(@"Data Source=.\SQLEXPRESS; Initial Catalog=tests; User Instance=False; Integrated Security=True;")
+                : base("name=dbConnection")
             {
+                //System.Data.Entity.Database.SetInitializer<QuestionsContext>(null);
             }
 
-            /*protected override void OnModelCreating(DbModelBuilder modelBuilder)
-            {
-                modelBuilder.Entity<Question>().ToTable("questions");
-            }*/
-
             public DbSet<BasicQuestion> Questions { get; set; }
+
+            protected override void OnModelCreating(DbModelBuilder modelBuilder)
+            {
+                /*modelBuilder.Conventions
+                    .Remove<PluralizingTableNameConvention>();*/
+            }
         }
 
         private QuestionsContext context = new QuestionsContext();

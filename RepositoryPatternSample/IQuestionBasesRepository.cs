@@ -9,9 +9,9 @@ namespace Repositories
 {
     public interface IQuestionBasesRepository
     {
-        void Add(QuestionBase question);
-        QuestionBase GetQuestionById(long id);
-        IEnumerable<QuestionBase> GetAllQuestions();
+        void Add(BasicQuestion question);
+        BasicQuestion GetQuestionById(long id);
+        IEnumerable<BasicQuestion> GetAllQuestions();
         void Clear();
     }
 }
