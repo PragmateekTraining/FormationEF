@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A839EC81-F58C-4879-9DA1-B4D22267235F}</ProjectGuid>
+    <ProjectGuid>{90C06172-8785-429B-9BCD-5A00A5DD94A3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RepositoryPatternSample.Tests</RootNamespace>
-    <AssemblyName>RepositoryPatternSample.Tests</AssemblyName>
+    <RootNamespace>OrphansTests</RootNamespace>
+    <AssemblyName>OrphansTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -34,27 +34,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
@@ -76,26 +57,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="QuestionnairePresentationsRepositoryTests.cs" />
-    <Compile Include="TaggedQuestionsTPCRepositoryTests.cs" />
-    <Compile Include="TaggedQuestionsRepositoryTests.cs" />
-    <Compile Include="QuestionnairesRepositoryTests.cs" />
-    <Compile Include="QuestionWithAuthorRepositoryTests.cs" />
-    <Compile Include="QuestionWithMetadataRepositoryTests.cs" />
-    <Compile Include="EFQuestionBasesRepositoryTests.cs" />
-    <Compile Include="QuestionsRepositoryTests.cs" />
+    <Compile Include="OrphansTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQLiteQuestionsRepositoryTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RelationshipsSample\Model.csproj">
-      <Project>{e3428a17-5a65-4cce-b7f2-e60c5e320721}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RepositoryPatternSample\Repositories.csproj">
-      <Project>{1f263c13-6d52-4f2c-afcd-a3addf537b15}</Project>
-      <Name>Repositories</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -11,7 +11,7 @@ namespace Repositories
         {
             protected override void OnModelCreating(DbModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<QuestionBase>().Map<QuestionBase>(m => m.Re.ToTable("QuestionBases");
+                modelBuilder.Entity<QuestionBase>().ToTable("QuestionBases");
                 modelBuilder.Entity<CategorizedQuestion>().ToTable("CategorizedQuestions");
                 modelBuilder.Entity<TaggedQuestion>().ToTable("TaggedQuestions");
             }
