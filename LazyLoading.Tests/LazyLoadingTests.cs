@@ -98,6 +98,8 @@ namespace LazyLoading.Tests
 
             using (Context context = new Context())
             {
+                Assert.AreSame(context.Set<Team>(), context.Teams);
+
                 context.Database.ExecuteSqlCommand("DELETE FROM People");
                 context.Database.ExecuteSqlCommand("DELETE FROM LazyTeams");
 

@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelationsUpdate.Tests", "Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyLoading.Tests", "LazyLoading.Tests\LazyLoading.Tests.csproj", "{087CFF7C-F513-4A40-94A4-2BCFFAE93652}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChangeTracking.Tests", "ChangeTracking.Tests\ChangeTracking.Tests.csproj", "{3C2423D3-7A61-4507-8B4B-4720F6447CF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,12 @@ Global
 		{087CFF7C-F513-4A40-94A4-2BCFFAE93652}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{087CFF7C-F513-4A40-94A4-2BCFFAE93652}.Release|Any CPU.Build.0 = Release|Any CPU
 		{087CFF7C-F513-4A40-94A4-2BCFFAE93652}.Release|x86.ActiveCfg = Release|Any CPU
+		{3C2423D3-7A61-4507-8B4B-4720F6447CF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C2423D3-7A61-4507-8B4B-4720F6447CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C2423D3-7A61-4507-8B4B-4720F6447CF1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3C2423D3-7A61-4507-8B4B-4720F6447CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C2423D3-7A61-4507-8B4B-4720F6447CF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C2423D3-7A61-4507-8B4B-4720F6447CF1}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
