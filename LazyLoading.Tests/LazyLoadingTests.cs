@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
 using System.Diagnostics;
+using System.Data.Entity.Infrastructure;
 
 namespace LazyLoading.Tests
 {
@@ -110,17 +111,31 @@ namespace LazyLoading.Tests
 
             using (Context context = new Context())
             {
+                bool hasLoadedPeople = false;
+
+                (context as IObjectContextAdapter).ObjectContext.ObjectMaterialized += (s, a) =>
+                {
+                    Debug.WriteLine(string.Format("Materializing '{0}'.", a.Entity));
+
+                    if (a.Entity is Person)
+                        hasLoadedPeople = true;
+                };
+
                 context.Database.Log += sql => Debug.WriteLine(sql);
 
                 LazyTeam team = context.LazyTeams.Single();
 
                 Assert.AreEqual(1, context.ChangeTracker.Entries().Count());
 
+                Assert.IsFalse(hasLoadedPeople);
+
                 Debug.WriteLine("========== Before ==========");
 
                 Assert.IsNotNull(team.Members);
 
                 Debug.WriteLine("========== After ==========");
+
+                Assert.IsTrue(hasLoadedPeople);
 
                 Assert.AreEqual(4, context.ChangeTracker.Entries().Count());
 
