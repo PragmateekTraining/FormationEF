@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enumeration.Tests", "Enumer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManyToManyWithData.Tests", "ManyToManyWithData.Tests\ManyToManyWithData.Tests.csproj", "{D6BFEBCA-986E-48BE-A965-4864589C3CBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecursiveAssociation.Tests", "RecursiveAssociation.Tests\RecursiveAssociation.Tests.csproj", "{127DB419-CA02-4723-9025-BC20F418651C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,12 @@ Global
 		{D6BFEBCA-986E-48BE-A965-4864589C3CBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6BFEBCA-986E-48BE-A965-4864589C3CBF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D6BFEBCA-986E-48BE-A965-4864589C3CBF}.Release|x86.ActiveCfg = Release|Any CPU
+		{127DB419-CA02-4723-9025-BC20F418651C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{127DB419-CA02-4723-9025-BC20F418651C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{127DB419-CA02-4723-9025-BC20F418651C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{127DB419-CA02-4723-9025-BC20F418651C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{127DB419-CA02-4723-9025-BC20F418651C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{127DB419-CA02-4723-9025-BC20F418651C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
