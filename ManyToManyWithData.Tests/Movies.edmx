@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MoviesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="MoviesModelStoreContainer">
+          <EntitySet Name="actors" EntityType="MoviesModel.Store.actors" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="movies" EntityType="MoviesModel.Store.movies" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="performances" EntityType="MoviesModel.Store.performances" store:Type="Tables" store:Schema="dbo" store:Name="performances">
+            <DefiningQuery>SELECT 
+      [performances].[movie_id] AS [movie_id], 
+      [performances].[actor_id] AS [actor_id], 
+      [performances].[fee] AS [fee]
+      FROM [dbo].[performances] AS [performances]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__performan__actor__014935CB" Association="MoviesModel.Store.FK__performan__actor__014935CB">
+            <End Role="actors" EntitySet="actors" />
+            <End Role="performances" EntitySet="performances" />
+          </AssociationSet>
+          <AssociationSet Name="FK__performan__movie__00551192" Association="MoviesModel.Store.FK__performan__movie__00551192">
+            <End Role="movies" EntitySet="movies" />
+            <End Role="performances" EntitySet="performances" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="actors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="text" />
+        </EntityType>
+        <EntityType Name="movies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="text" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'movies.dbo.performances' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="performances">
+          <Key>
+            <PropertyRef Name="movie_id" />
+            <PropertyRef Name="actor_id" />
+            <PropertyRef Name="fee" />
+          </Key>
+          <Property Name="movie_id" Type="int" Nullable="false" />
+          <Property Name="actor_id" Type="int" Nullable="false" />
+          <Property Name="fee" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__performan__actor__014935CB">
+          <End Role="actors" Type="MoviesModel.Store.actors" Multiplicity="1" />
+          <End Role="performances" Type="MoviesModel.Store.performances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="actors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="performances">
+              <PropertyRef Name="actor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__performan__movie__00551192">
+          <End Role="movies" Type="MoviesModel.Store.movies" Multiplicity="1" />
+          <End Role="performances" Type="MoviesModel.Store.performances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movies">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="performances">
+              <PropertyRef Name="movie_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MoviesModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MoviesContext" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="actors" EntityType="MoviesModel.actor" />
+          <EntitySet Name="movies" EntityType="MoviesModel.movie" />
+          <EntitySet Name="performances" EntityType="MoviesModel.performance" />
+          <AssociationSet Name="FK__performan__actor__014935CB" Association="MoviesModel.FK__performan__actor__014935CB">
+            <End Role="actors" EntitySet="actors" />
+            <End Role="performances" EntitySet="performances" />
+          </AssociationSet>
+          <AssociationSet Name="FK__performan__movie__00551192" Association="MoviesModel.FK__performan__movie__00551192">
+            <End Role="movies" EntitySet="movies" />
+            <End Role="performances" EntitySet="performances" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="actor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="performances" Relationship="MoviesModel.FK__performan__actor__014935CB" FromRole="actors" ToRole="performances" />
+        </EntityType>
+        <EntityType Name="movie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="performances" Relationship="MoviesModel.FK__performan__movie__00551192" FromRole="movies" ToRole="performances" />
+        </EntityType>
+        <EntityType Name="performance">
+          <Key>
+            <PropertyRef Name="movie_id" />
+            <PropertyRef Name="actor_id" />
+            <PropertyRef Name="fee" />
+          </Key>
+          <Property Name="movie_id" Type="Int32" Nullable="false" />
+          <Property Name="actor_id" Type="Int32" Nullable="false" />
+          <Property Name="fee" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="actor" Relationship="MoviesModel.FK__performan__actor__014935CB" FromRole="performances" ToRole="actors" />
+          <NavigationProperty Name="movie" Relationship="MoviesModel.FK__performan__movie__00551192" FromRole="performances" ToRole="movies" />
+        </EntityType>
+        <Association Name="FK__performan__actor__014935CB">
+          <End Role="actors" Type="MoviesModel.actor" Multiplicity="1" />
+          <End Role="performances" Type="MoviesModel.performance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="actors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="performances">
+              <PropertyRef Name="actor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__performan__movie__00551192">
+          <End Role="movies" Type="MoviesModel.movie" Multiplicity="1" />
+          <End Role="performances" Type="MoviesModel.performance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movies">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="performances">
+              <PropertyRef Name="movie_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MoviesModelStoreContainer" CdmEntityContainer="MoviesContext">
+          <EntitySetMapping Name="actors">
+            <EntityTypeMapping TypeName="MoviesModel.actor">
+              <MappingFragment StoreEntitySet="actors">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="movies">
+            <EntityTypeMapping TypeName="MoviesModel.movie">
+              <MappingFragment StoreEntitySet="movies">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="performances">
+            <EntityTypeMapping TypeName="MoviesModel.performance">
+              <MappingFragment StoreEntitySet="performances">
+                <ScalarProperty Name="movie_id" ColumnName="movie_id" />
+                <ScalarProperty Name="actor_id" ColumnName="actor_id" />
+                <ScalarProperty Name="fee" ColumnName="fee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
