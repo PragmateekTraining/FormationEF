@@ -38,13 +38,6 @@ namespace LazyLoading.Tests
     {
         public DbSet<Team> Teams { get; set; }
         public DbSet<LazyTeam> LazyTeams { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Team>().ToTable("my_lovely_customers", "crm");
-        }
     }
 
     [TestClass]
