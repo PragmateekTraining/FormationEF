@@ -81,6 +81,23 @@ namespace LazyLoading.Tests
 
                 Assert.AreEqual(3, team.Members.Count);
             }
+
+            using (Context context = new Context())
+            {
+                Team team = context.Teams.Single();
+
+                Assert.IsNull(team.Members);
+
+                Assert.IsFalse(context.Entry(team).Collection(t => t.Members).IsLoaded);
+
+                context.Entry(team).Collection(t => t.Members).Load();
+
+                Assert.IsTrue(context.Entry(team).Collection(t => t.Members).IsLoaded);
+
+                Assert.IsNotNull(team.Members);
+
+                Assert.AreEqual(3, team.Members.Count);
+            }
         }
 
         [TestMethod]
