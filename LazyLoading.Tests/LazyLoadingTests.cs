@@ -129,6 +129,8 @@ namespace LazyLoading.Tests
 
             using (Context context = new Context())
             {
+                Assert.IsTrue(context.Configuration.LazyLoadingEnabled);
+
                 bool hasLoadedPeople = false;
 
                 (context as IObjectContextAdapter).ObjectContext.ObjectMaterialized += (s, a) =>
