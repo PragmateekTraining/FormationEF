@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecursiveAssociation.Tests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitting.Tests", "Splitting.Tests\Splitting.Tests.csproj", "{3B300972-8AA1-4B74-A844-58A13DF31E51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompositeKey.Tests", "CompositeKey.Tests\CompositeKey.Tests.csproj", "{1636A66B-1D18-4D3D-A9D6-BC939500580E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +135,12 @@ Global
 		{3B300972-8AA1-4B74-A844-58A13DF31E51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B300972-8AA1-4B74-A844-58A13DF31E51}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3B300972-8AA1-4B74-A844-58A13DF31E51}.Release|x86.ActiveCfg = Release|Any CPU
+		{1636A66B-1D18-4D3D-A9D6-BC939500580E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1636A66B-1D18-4D3D-A9D6-BC939500580E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1636A66B-1D18-4D3D-A9D6-BC939500580E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1636A66B-1D18-4D3D-A9D6-BC939500580E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1636A66B-1D18-4D3D-A9D6-BC939500580E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1636A66B-1D18-4D3D-A9D6-BC939500580E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
