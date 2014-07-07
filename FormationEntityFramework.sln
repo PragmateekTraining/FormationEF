@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitting.Tests", "Splittin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompositeKey.Tests", "CompositeKey.Tests\CompositeKey.Tests.csproj", "{1636A66B-1D18-4D3D-A9D6-BC939500580E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inheritance.Tests", "Inheritance.Tests\Inheritance.Tests.csproj", "{5A15B7E6-8ADB-4024-AD10-5E88AF4EDDD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,12 @@ Global
 		{1636A66B-1D18-4D3D-A9D6-BC939500580E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1636A66B-1D18-4D3D-A9D6-BC939500580E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1636A66B-1D18-4D3D-A9D6-BC939500580E}.Release|x86.ActiveCfg = Release|Any CPU
+		{5A15B7E6-8ADB-4024-AD10-5E88AF4EDDD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A15B7E6-8ADB-4024-AD10-5E88AF4EDDD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A15B7E6-8ADB-4024-AD10-5E88AF4EDDD5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5A15B7E6-8ADB-4024-AD10-5E88AF4EDDD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A15B7E6-8ADB-4024-AD10-5E88AF4EDDD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A15B7E6-8ADB-4024-AD10-5E88AF4EDDD5}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

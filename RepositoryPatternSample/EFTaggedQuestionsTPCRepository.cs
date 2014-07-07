@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using Model;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Repositories
 {
