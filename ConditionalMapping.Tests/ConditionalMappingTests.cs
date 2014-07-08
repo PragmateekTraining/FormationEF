@@ -32,8 +32,11 @@ namespace ConditionalMapping.Tests
         {
             using (Context context = new Context())
             {
-                context.Database.ExecuteSqlCommand("INSERT INTO Documents(Title, IsDeleted) VALUES ('Martine à la mer', 0);" +
-                                                   "INSERT INTO Documents(Title, IsDeleted) VALUES ('Martine au cirque', 1);");
+                int count = context.Database.ExecuteSqlCommand("INSERT INTO Documents(Title, IsDeleted) VALUES (@p0, @p1);" +
+                                                   "INSERT INTO Documents(Title, IsDeleted) VALUES (@p2, @p3);",
+                                                   "Martine à la mer", 0, "Martine au cirque", 1);
+
+                Assert.AreEqual(2, count);
 
                 Document doc = new Document
                 {
