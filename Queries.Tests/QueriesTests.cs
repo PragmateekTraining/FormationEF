@@ -13,6 +13,8 @@ namespace Queries.Tests
 
         public string Name { get; set; }
 
+        public string City { get; set; }
+
         public DateTime HireDate { get; set; }
     }
 
@@ -94,6 +96,10 @@ namespace Queries.Tests
                 Debug.WriteLine("===== Count =====");
 
                 context.Departments.Where(dpt => dpt.Employees.Count != 0).ToList();
+
+                Debug.WriteLine("===== Contains =====");
+
+                context.Employees.Where(e => new[] { "Paris", "London", null }.Contains(e.City)).ToList();
             }
         }
     }
