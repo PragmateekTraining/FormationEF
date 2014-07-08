@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneToOne.Tests", "OneToOne.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlQuery.Tests", "SqlQuery.Tests\SqlQuery.Tests.csproj", "{1CD37BEA-69D1-4DED-8A8A-784160387029}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Queries.Tests", "Queries.Tests\Queries.Tests.csproj", "{27ED62AC-DF9A-4250-B985-C064E8D8B1FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -181,6 +183,12 @@ Global
 		{1CD37BEA-69D1-4DED-8A8A-784160387029}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CD37BEA-69D1-4DED-8A8A-784160387029}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1CD37BEA-69D1-4DED-8A8A-784160387029}.Release|x86.ActiveCfg = Release|Any CPU
+		{27ED62AC-DF9A-4250-B985-C064E8D8B1FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27ED62AC-DF9A-4250-B985-C064E8D8B1FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27ED62AC-DF9A-4250-B985-C064E8D8B1FE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{27ED62AC-DF9A-4250-B985-C064E8D8B1FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27ED62AC-DF9A-4250-B985-C064E8D8B1FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27ED62AC-DF9A-4250-B985-C064E8D8B1FE}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
