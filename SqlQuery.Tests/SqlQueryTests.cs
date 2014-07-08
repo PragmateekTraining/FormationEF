@@ -1,11 +1,13 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
 using System.Data.Entity;
-using System.Linq;
+
 using System.Collections.Generic;
+using System.Linq;
+
 using System.Diagnostics;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SqlQuery.Tests
 {
@@ -23,11 +25,11 @@ namespace SqlQuery.Tests
     [TestClass]
     public class SqlQueryTests
     {
+        const string connectionString = @"Server=.\SQLExpress;Database=SqlQuery;Trusted_Connection=True;";
+
         [TestMethod]
         public void CanMaterializeRandomEntitiesWithSqlQuery()
         {
-            string connectionString = @"Server=.\SQLExpress;Database=SqlQuery;Trusted_Connection=True;";
-
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -49,6 +51,24 @@ namespace SqlQuery.Tests
                 {
                     Debug.WriteLine(player);
                 }
+            }
+        }
+
+        [TestMethod]
+        public void CanInvokeStoredProcedures()
+        {
+            using (DbContext context = new DbContext(connectionString))
+            {
+                int sum = context.Database.SqlQuery<int>("EXEC EF_Sum 123, 456").Single();
+
+                Assert.AreEqual(479, sum);
+            }
+
+            using (DbContext context = new DbContext(connectionString))
+            {
+                IList<Player> all = context.Database.SqlQuery<Player>("EXEC EF_All").ToList();
+
+                Assert.AreEqual(3, all.Count);
             }
         }
     }
