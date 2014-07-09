@@ -5,6 +5,7 @@ using Model;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data;
 using System.Data.SQLite;
+using System.Data.Entity.ModelConfiguration;
 
 namespace Repositories
 {
@@ -22,6 +23,12 @@ namespace Repositories
 
             protected override void OnModelCreating(DbModelBuilder modelBuilder)
             {
+                EntityTypeConfiguration<BasicQuestion> basicQuestionConfiguration = modelBuilder.Entity<BasicQuestion>();
+
+                basicQuestionConfiguration.Property(q => q.ID).HasColumnName("id");
+                basicQuestionConfiguration.Property(q => q.CreationDate).HasColumnName("creation_date");
+                basicQuestionConfiguration.Property(q => q.IsOptional).HasColumnName("is_optional");
+
                 /*modelBuilder.Conventions
                     .Remove<PluralizingTableNameConvention>();*/
             }
@@ -60,7 +67,7 @@ namespace Repositories
 
         public BasicQuestion GetQuestionById(long id)
         {
-            return context.Questions.SingleOrDefault(q => q.ID == id);
+            return context.Questions.SingleOrDefault(q => q.ID == (int)id);
         }
 
         public IEnumerable<BasicQuestion> GetAllQuestions()
