@@ -19,7 +19,19 @@ namespace ManyToManyWithData.Tests
 
                 using (IDbCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = File.ReadAllText("movies.sql");
+                    command.CommandText = File.ReadAllText("CreateDatabase.sql");
+
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            using (IDbConnection connection = new SqlConnection(@"Server=.\SQLExpress;Database=movies;Trusted_Connection=True;"))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = File.ReadAllText("FillDatabase.sql");
 
                     command.ExecuteNonQuery();
                 }
