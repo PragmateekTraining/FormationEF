@@ -28,6 +28,22 @@ namespace SqlQuery.Tests
     {
         const string connectionString = @"Server=.\SQLExpress;Database=SqlQuery;Trusted_Connection=True;";
 
+        [ClassInitialize]
+        public static void SetUp(TestContext _)
+        {
+            using (IDbConnection connection = new SqlConnection(@"Server=.\SQLExpress;Trusted_Connection=True;"))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = File.ReadAllText("Database.sql");
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
         [TestMethod]
         public void CanMaterializeRandomEntitiesWithSqlQuery()
         {
