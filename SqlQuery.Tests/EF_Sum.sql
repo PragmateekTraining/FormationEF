@@ -3,11 +3,3 @@ AS
 BEGIN
 	SELECT @a + @b as [sum]
 END
-
-GO
-
-CREATE PROCEDURE EF_All
-AS
-BEGIN
-	SELECT * FROM Players
-END

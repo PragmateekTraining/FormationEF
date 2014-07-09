@@ -8,6 +8,7 @@ using System.Linq;
 using System.Diagnostics;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
 
 namespace SqlQuery.Tests
 {
@@ -58,6 +59,37 @@ namespace SqlQuery.Tests
         [TestMethod]
         public void CanInvokeStoredProcedures()
         {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = @"IF OBJECT_ID('EF_Sum') IS NOT NULL
+                                            BEGIN
+                                                DROP PROCEDURE EF_Sum
+                                                DROP PROCEDURE EF_All
+                                            END";
+
+                    command.ExecuteNonQuery();
+                }
+
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = File.ReadAllText("EF_Sum.sql");
+
+                    command.ExecuteNonQuery();
+                }
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = File.ReadAllText("EF_All.sql");
+
+                    command.ExecuteNonQuery();
+                }
+            }
+
             using (DbContext context = new DbContext(connectionString))
             {
                 int sum = context.Database.SqlQuery<int>("EXEC EF_Sum 123, 456").Single();
