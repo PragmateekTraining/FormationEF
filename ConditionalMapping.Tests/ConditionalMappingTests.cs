@@ -28,7 +28,7 @@ namespace ConditionalMapping.Tests
     public class ConditionalMappingTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void WontLoadDeletedDocuments()
         {
             using (Context context = new Context())
             {

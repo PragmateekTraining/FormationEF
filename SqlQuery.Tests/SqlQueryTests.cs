@@ -36,7 +36,8 @@ namespace SqlQuery.Tests
 
                 using (IDbCommand command = connection.CreateCommand())
                 {
-                    command.CommandText = "CREATE TABLE Players(id INT PRIMARY KEY IDENTITY, name TEXT);" +
+                    command.CommandText = "IF OBJECT_ID('Players') IS NULL CREATE TABLE Players(id INT PRIMARY KEY IDENTITY, name TEXT);" +
+                                          "TRUNCATE TABLE Players;" +
                                           "INSERT INTO Players(name) VALUES ('John');" +
                                           "INSERT INTO Players(name) VALUES ('Joe');" +
                                           "INSERT INTO Players(name) VALUES ('Bob');";
@@ -61,7 +62,7 @@ namespace SqlQuery.Tests
             {
                 int sum = context.Database.SqlQuery<int>("EXEC EF_Sum 123, 456").Single();
 
-                Assert.AreEqual(479, sum);
+                Assert.AreEqual(579, sum);
             }
 
             using (DbContext context = new DbContext(connectionString))

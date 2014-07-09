@@ -83,7 +83,7 @@
     <Compile Include="Person.cs">
       <DependentUpon>HRModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="ComplexTypesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

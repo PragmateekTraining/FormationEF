@@ -42,7 +42,7 @@ namespace Repositories
 
         public void Clear()
         {
-            context.Database.ExecuteSqlCommand("DELETE FROM QuestionBases");
+            context.Database.ExecuteSqlCommand("DELETE FROM BasicQuestions");
         }
     }
 }

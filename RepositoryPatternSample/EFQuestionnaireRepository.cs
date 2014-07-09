@@ -9,6 +9,12 @@ namespace Repositories
     {
         class QuestionsContext : DbContext
         {
+            static QuestionsContext()
+            {
+                // /!\ Only for testing, not production code /!\
+                Database.SetInitializer(new DropCreateDatabaseAlways<QuestionsContext>());
+            }
+
             protected override void OnModelCreating(DbModelBuilder modelBuilder)
             {
                 modelBuilder.Entity<Questionnaire>().HasMany<QuestionBase>(questionnaire => questionnaire.Questions)

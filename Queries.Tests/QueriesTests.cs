@@ -29,6 +29,12 @@ namespace Queries.Tests
 
     class HRContext : DbContext
     {
+        static HRContext()
+        {
+            // /!\ Only for testing, not production code /!\
+            Database.SetInitializer(new DropCreateDatabaseAlways<HRContext>());
+        }
+
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
     }

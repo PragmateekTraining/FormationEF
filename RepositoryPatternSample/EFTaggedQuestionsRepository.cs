@@ -9,6 +9,12 @@ namespace Repositories
     {
         protected class QuestionsContext : DbContext
         {
+            static QuestionsContext()
+            {
+                // /!\ Only for testing, not production code /!\
+                Database.SetInitializer(new DropCreateDatabaseAlways<QuestionsContext>());
+            }
+
             public DbSet<QuestionBase> Questions { get; set; }
         }
 
@@ -42,7 +48,9 @@ namespace Repositories
 
         public void Clear()
         {
-            context.Database.ExecuteSqlCommand("DELETE FROM QuestionBases");
+            context.Database.ExecuteSqlCommand("IF OBJECT_ID('TaggedQuestions') IS NOT NULL DELETE FROM TaggedQuestions");
+            context.Database.ExecuteSqlCommand("IF OBJECT_ID('CategorizedQuestions') IS NOT NULL DELETE FROM CategorizedQuestions");
+            context.Database.ExecuteSqlCommand("IF OBJECT_ID('QuestionBases') IS NOT NULL DELETE FROM QuestionBases");
         }
     }
 }
