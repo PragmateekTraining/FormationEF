@@ -57,7 +57,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="RelationsUpdateTests.cs" />
+    <Compile Include="ManyToManyUpdateTests.cs" />
+    <Compile Include="OneToOneUpdateTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

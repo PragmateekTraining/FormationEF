@@ -47,7 +47,7 @@ namespace RelationsUpdate.Tests
     }
 
     [TestClass]
-    public class RelationsUpdateTests
+    public class OneToOneUpdateTests
     {
         [TestMethod]
         public void CanUpdateARelation()
