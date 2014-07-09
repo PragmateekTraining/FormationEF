@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
+using System.Data.Entity;
 
 namespace ManyToManyWithData.Tests
 {
@@ -10,6 +11,8 @@ namespace ManyToManyWithData.Tests
         [TestMethod]
         public void CanRetrieveData()
         {
+            Database.SetInitializer(new DropCreateDatabaseAlways<MoviesContext>());
+
             using (MoviesContext context = new MoviesContext())
             {
                 foreach (movie movie in context.movies)
