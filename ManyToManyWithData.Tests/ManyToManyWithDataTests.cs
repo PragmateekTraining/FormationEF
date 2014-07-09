@@ -1,7 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
-using System.Data.Entity;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
 
 namespace ManyToManyWithData.Tests
 {
@@ -11,7 +12,18 @@ namespace ManyToManyWithData.Tests
         [TestMethod]
         public void CanRetrieveData()
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<MoviesContext>());
+            // Database.SetInitializer(new DropCreateDatabaseAlways<MoviesContext>());
+            using (IDbConnection connection = new SqlConnection(@"Server=.\SQLExpress;Trusted_Connection=True;"))
+            {
+                connection.Open();
+
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = File.ReadAllText("movies.sql");
+
+                    command.ExecuteNonQuery();
+                }
+            }
 
             using (MoviesContext context = new MoviesContext())
             {
