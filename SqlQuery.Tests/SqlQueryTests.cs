@@ -42,11 +42,7 @@ namespace SqlQuery.Tests
                     command.ExecuteNonQuery();
                 }
             }
-        }
 
-        [TestMethod]
-        public void CanMaterializeRandomEntitiesWithSqlQuery()
-        {
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -62,13 +58,35 @@ namespace SqlQuery.Tests
                     command.ExecuteNonQuery();
                 }
             }
+        }
+
+        class GameContext : DbContext
+        {
+            public DbSet<Player> Players { get; set; }
+
+            public GameContext(string connectionString)
+                : base(connectionString)
+            {
+            }
+        }
+
+        [TestMethod]
+        public void CanMaterializeRandomEntitiesWithSqlQuery()
+        {
+            string[] expectedNames = { "John", "Joe", "Bob" };
 
             using (DbContext context = new DbContext(connectionString))
             {
-                foreach (Player player in context.Database.SqlQuery<Player>("SELECT * FROM Players"))
-                {
-                    Debug.WriteLine(player);
-                }
+                string[] names = context.Database.SqlQuery<Player>("SELECT * FROM Players").Select(p => p.Name).ToArray();
+
+                Assert.AreEqual(3, expectedNames.Intersect(names).Count());
+            }
+
+            using (GameContext context = new GameContext(connectionString))
+            {
+                string[] names = context.Players.SqlQuery("SELECT * FROM Players").Select(p => p.Name).ToArray();
+
+                Assert.AreEqual(3, expectedNames.Intersect(names).Count());
             }
         }
 

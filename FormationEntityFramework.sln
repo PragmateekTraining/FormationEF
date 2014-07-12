@@ -58,6 +58,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExplicitInterfaceImplementa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conversions.Tests", "Conversions.Tests\Conversions.Tests.csproj", "{5392A94A-0C7F-4C93-9807-BA883FBA23BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timeout.Tests", "Timeout.Tests\Timeout.Tests.csproj", "{178A3C4E-E43F-4F88-BBD6-80C743AA8B20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -220,6 +222,12 @@ Global
 		{5392A94A-0C7F-4C93-9807-BA883FBA23BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5392A94A-0C7F-4C93-9807-BA883FBA23BB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5392A94A-0C7F-4C93-9807-BA883FBA23BB}.Release|x86.ActiveCfg = Release|Any CPU
+		{178A3C4E-E43F-4F88-BBD6-80C743AA8B20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{178A3C4E-E43F-4F88-BBD6-80C743AA8B20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{178A3C4E-E43F-4F88-BBD6-80C743AA8B20}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{178A3C4E-E43F-4F88-BBD6-80C743AA8B20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{178A3C4E-E43F-4F88-BBD6-80C743AA8B20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{178A3C4E-E43F-4F88-BBD6-80C743AA8B20}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

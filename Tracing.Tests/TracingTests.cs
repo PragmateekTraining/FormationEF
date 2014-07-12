@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data.Entity;
 using System.Diagnostics;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
 
 namespace Tracing.Tests
 {
@@ -24,7 +26,7 @@ namespace Tracing.Tests
         {
             using (CRMContext context = new CRMContext())
             {
-                context.Database.Log += sql => Debug.WriteLine(sql);
+                context.Database.Log += Debug.WriteLine;
 
                 context.Customers.Add(new Customer { Name = "Chuck Norris" });
 
