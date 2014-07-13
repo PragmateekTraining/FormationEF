@@ -12,7 +12,7 @@ namespace CompositeKey.Tests
     {
         // [Key, Column(Order = 0)]
         public string Title { get; set; }
-        //[Key, Column(Order = 1)]
+        // [Key, Column(Order = 1)]
         public int Version { get; set; }
 
         public string Text { get; set; }
