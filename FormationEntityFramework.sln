@@ -64,6 +64,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validation.Tests", "Validat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypesMapping.Tests", "TypesMapping.Tests\TypesMapping.Tests.csproj", "{DDE99735-FD62-480F-B0A2-9EBB2B72F093}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultipleRelations.Tests", "MultipleRelations.Tests\MultipleRelations.Tests.csproj", "{99DF8A44-0748-4DF0-8ED7-D5B261F9A698}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -244,6 +246,12 @@ Global
 		{DDE99735-FD62-480F-B0A2-9EBB2B72F093}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDE99735-FD62-480F-B0A2-9EBB2B72F093}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DDE99735-FD62-480F-B0A2-9EBB2B72F093}.Release|x86.ActiveCfg = Release|Any CPU
+		{99DF8A44-0748-4DF0-8ED7-D5B261F9A698}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99DF8A44-0748-4DF0-8ED7-D5B261F9A698}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99DF8A44-0748-4DF0-8ED7-D5B261F9A698}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{99DF8A44-0748-4DF0-8ED7-D5B261F9A698}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99DF8A44-0748-4DF0-8ED7-D5B261F9A698}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99DF8A44-0748-4DF0-8ED7-D5B261F9A698}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
