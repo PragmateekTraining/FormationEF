@@ -15,11 +15,11 @@ namespace MultipleRelations.Tests
 
             public string Name { get; set; }
 
-            [ForeignKey("DirectorRole_Company_Id")]
+            // [ForeignKey("DirectorRole_Company_Id")]
             public ICollection<Employee> Directors { get; set; }
-            [ForeignKey("ManagerRole_Company_Id")]
+            // [ForeignKey("ManagerRole_Company_Id")]
             public ICollection<Employee> Managers { get; set; }
-            [ForeignKey("EmployeeRole_Company_Id")]
+            // [ForeignKey("EmployeeRole_Company_Id")]
             public ICollection<Employee> Employees { get; set; }
 
             public Company()

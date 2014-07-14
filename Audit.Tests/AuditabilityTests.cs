@@ -138,7 +138,7 @@ namespace Audit.Tests
 
                 context.SaveChanges();
 
-                Assert.IsTrue(Math.Abs(((code as IAuditableEntity).CreationTimestamp - creationDate).TotalMilliseconds) < 1);
+                Assert.IsTrue(Math.Abs(((code as IAuditableEntity).CreationTimestamp - creationDate).TotalMilliseconds) < 5);
                 Assert.IsTrue((DateTime.UtcNow - (code as IAuditableEntity).UpdateTimestamp) < TimeSpan.FromSeconds(1));
             }
         }

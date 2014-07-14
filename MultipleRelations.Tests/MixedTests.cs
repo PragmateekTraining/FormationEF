@@ -63,8 +63,8 @@ namespace MultipleRelations.Tests
         Database.SetInitializer(new DropCreateDatabaseAlways<CorporateContext>());
     }
 
-    [TestMethod]
-    public void CanHandleMultipleRelations()
+    // [TestMethod]
+    public void CanHandleMultipleMixedRelations()
     {
         Company Disney = new Company { Name = "Disney" };
 
