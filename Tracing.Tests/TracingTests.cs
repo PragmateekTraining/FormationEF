@@ -26,7 +26,7 @@ namespace Tracing.Tests
         {
             using (CRMContext context = new CRMContext())
             {
-                context.Database.Log += Debug.WriteLine;
+                context.Database.Log += sql => Debug.WriteLine(sql);
 
                 context.Customers.Add(new Customer { Name = "Chuck Norris" });
 

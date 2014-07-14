@@ -20,7 +20,7 @@ namespace StubEntities.Tests
         {
             Context context = new Context();
 
-            context.Database.Log += Debug.WriteLine;
+            context.Database.Log += sql => Debug.WriteLine(sql);
 
             return context;
         }
