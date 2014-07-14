@@ -20,27 +20,14 @@ namespace TypesMapping.Tests
         public DateTime DateTime { get; set; }
         // public DateTimeOffset DateTimeOffset { get; set; }
         public Guid Guid { get; set; }
-        // [Column(TypeName = "DateTime2")]
-        // public DateTime DateTime2 { get; set; }
-        public byte[] ArrayOfBytes { get; set; }
-    }
-
-    class BrokenDateTime2
-    {
-        public long Id { get; set; }
-
         [Column(TypeName = "DateTime2")]
         public DateTime DateTime2 { get; set; }
+        public byte[] ArrayOfBytes { get; set; }
     }
 
     class Context : DbContext
     {
         public DbSet<Entity> Entities { get; set; }
-    }
-
-    class BrokenDateTime2Context : DbContext
-    {
-        public DbSet<BrokenDateTime2> BrokenDateTime2 { get; set; }
     }
 
     [TestClass]
@@ -53,20 +40,6 @@ namespace TypesMapping.Tests
             {
                 context.Database.Initialize(true);
             }
-        }
-
-        /*[TestMethod]
-        public void CheckDateTime2()
-        {
-            using (BrokenDateTime2Context context = new BrokenDateTime2Context())
-            {
-                context.Database.Initialize(true);
-            }
-        }*/
-
-        static void Main()
-        {
-            new TypesMappingTests().CheckTypesMapping();
         }
     }
 }
