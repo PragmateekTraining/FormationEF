@@ -100,6 +100,9 @@ namespace StubEntities.Tests
             {
                 IList<BasicQuestion> questions = context.Questions.ToList();
 
+                // First check that we have not changed other properties
+                Assert.AreEqual("2+2?", questions[1].Text);
+
                 Assert.AreEqual("4", questions[1].Answer);
             }
         }
@@ -111,7 +114,7 @@ namespace StubEntities.Tests
 
             using (Context context = NewContext())
             {
-                BasicQuestion stub = new BasicQuestion { ID = 2, CreationDate = DateTime.UtcNow };
+                BasicQuestion stub = new BasicQuestion { ID = 2, CreationDate = DateTime.UtcNow, Answer = "4" };
 
                 context.Entry(stub).State = EntityState.Modified;
 
@@ -122,8 +125,10 @@ namespace StubEntities.Tests
             {
                 IList<BasicQuestion> questions = context.Questions.ToList();
 
+                Assert.AreEqual("4", questions[1].Answer);
+
+                // Check that we have overridden other properties
                 Assert.AreEqual(null, questions[1].Text);
-                Assert.AreEqual(null, questions[1].Answer);
             }
         }
     }
