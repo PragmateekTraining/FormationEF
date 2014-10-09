@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicQuestion.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="QuestionnairePresentation.cs" />
     <Compile Include="TaggedQuestion.cs" />
     <Compile Include="QuestionWithAuthor.cs" />

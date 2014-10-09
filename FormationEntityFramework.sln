@@ -66,6 +66,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypesMapping.Tests", "Types
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultipleRelations.Tests", "MultipleRelations.Tests\MultipleRelations.Tests.csproj", "{99DF8A44-0748-4DF0-8ED7-D5B261F9A698}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADONET.Tests", "ADONET.Tests\ADONET.Tests.csproj", "{B0D35869-EA65-473A-B174-943B38D6FB7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -252,6 +254,12 @@ Global
 		{99DF8A44-0748-4DF0-8ED7-D5B261F9A698}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99DF8A44-0748-4DF0-8ED7-D5B261F9A698}.Release|Any CPU.Build.0 = Release|Any CPU
 		{99DF8A44-0748-4DF0-8ED7-D5B261F9A698}.Release|x86.ActiveCfg = Release|Any CPU
+		{B0D35869-EA65-473A-B174-943B38D6FB7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0D35869-EA65-473A-B174-943B38D6FB7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0D35869-EA65-473A-B174-943B38D6FB7E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B0D35869-EA65-473A-B174-943B38D6FB7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0D35869-EA65-473A-B174-943B38D6FB7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0D35869-EA65-473A-B174-943B38D6FB7E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
