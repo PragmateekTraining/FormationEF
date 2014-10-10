@@ -17,6 +17,7 @@ namespace Model
     public class Log
     {
         public int ID { get; set; }
+        public DateTime Timestamp { get; set; }
         public Level Level { get; set; }
         public string Message { get; set; }
     }
