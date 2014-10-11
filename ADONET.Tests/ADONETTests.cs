@@ -31,6 +31,7 @@ namespace ADONET.Tests
             CanUpdateTheDataWithADirectUpdateSQLQuery();
             CanUpdateTheDataWithADataSet();
             CanUseATypedDataSet();
+            CanUseATransaction();
         }
 
         [TestMethod]
@@ -414,6 +415,85 @@ CREATE DATABASE @DBName".Replace("@DBName", DBName);
                 int numberOfUpdatedRecords = dataAdapter.Update(dataSet, "Logs");
 
                 Assert.AreEqual(3, numberOfUpdatedRecords);
+            }
+        }
+
+        private int CountLogs(IDbConnection connection)
+        {
+            string countLogsQuery = "SELECT COUNT(*) FROM Logs";
+
+            using (IDbCommand countLogsCommand = connection.CreateCommand())
+            {
+                countLogsCommand.CommandText = countLogsQuery;
+
+                object result = countLogsCommand.ExecuteScalar();
+
+                int count = Convert.ToInt32(result);
+
+                return count;
+            }
+        }
+
+        [TestMethod]
+        public void CanUseATransaction()
+        {
+            string deleteLogQuery = "DELETE FROM Logs WHERE ID=@ID";
+
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                int count = CountLogs(connection);
+
+                Assert.AreEqual(3, count);
+
+                using (IDbTransaction transaction = connection.BeginTransaction())
+                {
+                    using (IDbCommand deleteLogCommand = connection.CreateCommand())
+                    {
+                        deleteLogCommand.CommandText = deleteLogQuery;
+                        deleteLogCommand.Transaction = transaction;
+
+                        IDbDataParameter idParameter = deleteLogCommand.CreateParameter();
+                        idParameter.ParameterName = "@ID";
+                        idParameter.Value = 1;
+
+                        deleteLogCommand.Parameters.Add(idParameter);
+
+                        int numberOfDeletedRecords = deleteLogCommand.ExecuteNonQuery();
+
+                        Assert.AreEqual(1, numberOfDeletedRecords);
+                    }
+                }
+
+                count = CountLogs(connection);
+
+                Assert.AreEqual(3, count);
+
+                using (IDbTransaction transaction = connection.BeginTransaction())
+                {
+                    using (IDbCommand deleteLogCommand = connection.CreateCommand())
+                    {
+                        deleteLogCommand.CommandText = deleteLogQuery;
+                        deleteLogCommand.Transaction = transaction;
+
+                        IDbDataParameter idParameter = deleteLogCommand.CreateParameter();
+                        idParameter.ParameterName = "@ID";
+                        idParameter.Value = 1;
+
+                        deleteLogCommand.Parameters.Add(idParameter);
+
+                        int numberOfDeletedRecords = deleteLogCommand.ExecuteNonQuery();
+
+                        Assert.AreEqual(1, numberOfDeletedRecords);
+                    }
+
+                    transaction.Commit();
+                }
+
+                count = CountLogs(connection);
+
+                Assert.AreEqual(2, count);
             }
         }
     }
