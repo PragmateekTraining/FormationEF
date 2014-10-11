@@ -28,6 +28,9 @@ namespace ADONET.Tests
             CanCreateANewTable();
             CanFeedANewTable();
             CanGetTheDataFromTheDatabaseInConnectedMode();
+            CanUpdateTheDataWithADirectUpdateSQLQuery();
+            CanUpdateTheDataWithADataSet();
+            CanUseATypedDataSet();
         }
 
         [TestMethod]
@@ -215,24 +218,23 @@ CREATE DATABASE @DBName".Replace("@DBName", DBName);
         {
             string getAllLogsQuery = "SELECT * FROM Logs";
 
-            DataSet dataSet = new DataSet();
-
             DbProviderFactory providerFactory = DbProviderFactories.GetFactory("System.Data.SqlClient");
 
             IDbDataAdapter dataAdapter = providerFactory.CreateDataAdapter();
 
-            using (DbConnection connection = new SqlConnection(connectionString))
+            IDbCommand getAllLogsCommand = providerFactory.CreateCommand();
+            getAllLogsCommand.CommandText = getAllLogsQuery;
+            dataAdapter.SelectCommand = getAllLogsCommand;
+
+            DataSet dataSet = new DataSet();
+
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
-                using (IDbCommand getAllLogsCommand = connection.CreateCommand())
-                {
-                    getAllLogsCommand.CommandText = getAllLogsQuery;
+                getAllLogsCommand.Connection = connection;
 
-                    dataAdapter.SelectCommand = getAllLogsCommand;
-
-                    dataAdapter.Fill(dataSet);
-                }
+                dataAdapter.Fill(dataSet);
             }
 
             Assert.AreEqual(1, dataSet.Tables.Count);
@@ -255,6 +257,163 @@ CREATE DATABASE @DBName".Replace("@DBName", DBName);
                 Assert.AreEqual(timestamp, referenceLogs[i].Timestamp);
                 Assert.AreEqual(level, referenceLogs[i].Level);
                 Assert.AreEqual(message, referenceLogs[i].Message);
+            }
+        }
+
+        [TestMethod]
+        public void CanUpdateTheDataWithADirectUpdateSQLQuery()
+        {
+            string countLogsIn2001Query = "SELECT COUNT(*) FROM Logs WHERE YEAR(Timestamp) = 2001";
+            string updateLogsQuery = "UPDATE Logs SET Timestamp = DATEADD(year, 1, Timestamp)";
+
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (IDbCommand countLogsIn2001Command = connection.CreateCommand())
+                {
+                    countLogsIn2001Command.CommandText = countLogsIn2001Query;
+
+                    object result = countLogsIn2001Command.ExecuteScalar();
+
+                    int count = Convert.ToInt32(result);
+
+                    Assert.AreEqual(3, count);
+                }
+
+                using (IDbCommand updateLogsCommand = connection.CreateCommand())
+                {
+                    updateLogsCommand.CommandText = updateLogsQuery;
+
+                    int numberOfUpdatedRecords = updateLogsCommand.ExecuteNonQuery();
+
+                    Assert.AreEqual(3, numberOfUpdatedRecords);
+                }
+
+                using (IDbCommand countLogsIn2001Command = connection.CreateCommand())
+                {
+                    countLogsIn2001Command.CommandText = countLogsIn2001Query;
+
+                    object result = countLogsIn2001Command.ExecuteScalar();
+
+                    int count = Convert.ToInt32(result);
+
+                    Assert.AreEqual(0, count);
+                }
+            }
+        }
+
+        [TestMethod]
+        public void CanUpdateTheDataWithADataSet()
+        {
+            string countLogsInFebruaryQuery = "SELECT COUNT(*) FROM Logs WHERE MONTH(Timestamp) = 2";
+
+            DbProviderFactory providerFactory = DbProviderFactories.GetFactory("System.Data.SqlClient");
+
+            using (DbConnection connection = providerFactory.CreateConnection())
+            {
+                connection.ConnectionString = connectionString;
+
+                connection.Open();
+
+                using (IDbCommand countLogsInFebruaryCommand = connection.CreateCommand())
+                {
+                    countLogsInFebruaryCommand.CommandText = countLogsInFebruaryQuery;
+
+                    object result = countLogsInFebruaryCommand.ExecuteScalar();
+
+                    int count = Convert.ToInt32(result);
+
+                    Assert.AreEqual(3, count);
+                }
+
+                DbDataAdapter dataAdapter = providerFactory.CreateDataAdapter();
+
+                DbCommand selectCommand = providerFactory.CreateCommand();
+                selectCommand.CommandText = "SELECT * FROM Logs";
+                selectCommand.Connection = connection;
+
+                DbCommandBuilder commandBuilder = providerFactory.CreateCommandBuilder();
+                commandBuilder.DataAdapter = dataAdapter;
+
+                dataAdapter.SelectCommand = selectCommand;
+                dataAdapter.InsertCommand = commandBuilder.GetInsertCommand();
+                dataAdapter.UpdateCommand = commandBuilder.GetUpdateCommand();
+                dataAdapter.DeleteCommand = commandBuilder.GetDeleteCommand();
+
+                DataSet dataSet = new DataSet();
+                dataAdapter.Fill(dataSet);
+
+                #region Records update
+                DataTable logsTable = dataSet.Tables[0];
+
+                for (int i = 0; i < 3; ++i)
+                {
+                    DataRow record = logsTable.Rows[i];
+
+                    DateTime timestamp = (DateTime)record["Timestamp"];
+
+                    timestamp = timestamp.AddMonths(1);
+
+                    record["Timestamp"] = timestamp;
+                }
+
+                int numberOfUpdatedRecords = dataAdapter.Update(dataSet);
+
+                Assert.AreEqual(3, numberOfUpdatedRecords);
+                #endregion
+
+                using (IDbCommand countLogsInFebruaryCommand = connection.CreateCommand())
+                {
+                    countLogsInFebruaryCommand.CommandText = countLogsInFebruaryQuery;
+
+                    object result = countLogsInFebruaryCommand.ExecuteScalar();
+
+                    int count = Convert.ToInt32(result);
+
+                    Assert.AreEqual(0, count);
+                }
+            }
+        }
+
+        [TestMethod]
+        public void CanUseATypedDataSet()
+        {
+            DbProviderFactory providerFactory = DbProviderFactories.GetFactory("System.Data.SqlClient");
+
+            using (DbConnection connection = providerFactory.CreateConnection())
+            {
+                connection.ConnectionString = connectionString;
+
+                connection.Open();
+
+                DbDataAdapter dataAdapter = providerFactory.CreateDataAdapter();
+
+                dataAdapter.SelectCommand = providerFactory.CreateCommand();
+                dataAdapter.SelectCommand.CommandText = "SELECT * FROM Logs";
+                dataAdapter.SelectCommand.Connection = connection;
+
+                DbCommandBuilder commandBuilder = providerFactory.CreateCommandBuilder();
+                commandBuilder.DataAdapter = dataAdapter;
+
+                dataAdapter.InsertCommand = commandBuilder.GetInsertCommand();
+                dataAdapter.UpdateCommand = commandBuilder.GetUpdateCommand();
+                dataAdapter.DeleteCommand = commandBuilder.GetDeleteCommand();
+
+                LogsDataSet dataSet = new LogsDataSet();
+
+                dataAdapter.Fill(dataSet, "Logs");
+
+                for (int i = 0; i < 3; ++i)
+                {
+                    LogsDataSet.LogsRow record = dataSet.Logs[i];
+
+                    record.Timestamp = record.Timestamp.AddDays(1);
+                }
+
+                int numberOfUpdatedRecords = dataAdapter.Update(dataSet, "Logs");
+
+                Assert.AreEqual(3, numberOfUpdatedRecords);
             }
         }
     }
